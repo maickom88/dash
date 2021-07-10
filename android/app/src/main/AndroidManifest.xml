@@ -2,6 +2,8 @@
     package="com.example.dash">
    <application
         android:label="dash"
+       android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_resource"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

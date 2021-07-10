@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:dash/data/models/cards_resume_models.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/constants.dart';
-import '../../../../data/models/models.dart';
 
 class InfoCardGridView extends StatelessWidget {
   const InfoCardGridView({

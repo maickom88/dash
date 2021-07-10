@@ -1,3 +1,6 @@
 class UrlConst {
-  static const String domain = 'http://192.168.0.106:8080';
+  static const String domain = 'http://67.205.157.166';
+
+  static const String loginEnpoint = '$domain/auth';
+  static const String companiesEndpoint = '$domain/company';
 }

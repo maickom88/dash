@@ -5,9 +5,11 @@ import '../../../../core/utils/responsive_util.dart';
 
 class HeaderTableWidget extends StatelessWidget {
   final String title;
+  final Function(String) onSearch;
   const HeaderTableWidget({
     Key? key,
     required this.title,
+    required this.onSearch,
   }) : super(key: key);
 
   @override
@@ -28,6 +30,7 @@ class HeaderTableWidget extends StatelessWidget {
         SizedBox(width: 20),
         Expanded(
           child: TextFormField(
+            onChanged: (value) => onSearch(value),
             style: Theme.of(context)
                 .textTheme
                 .bodyText2

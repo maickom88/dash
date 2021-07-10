@@ -1,1 +1,1 @@
-export './cards_resume_models.dart';
+export 'token_access_model.dart';

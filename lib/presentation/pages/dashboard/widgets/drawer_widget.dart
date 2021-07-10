@@ -1,10 +1,7 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/constants/constants.dart';
-import '../../../../core/extensions/extensions.dart';
-import 'widgets.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({
@@ -36,20 +33,9 @@ class DrawerWidget extends StatelessWidget {
           horizontalTitleGap: 0.0,
           leading: Icon(
             Icons.dashboard,
-            size: Get.height.percent(4),
           ),
-          title: Container(
-            width: double.infinity,
-            height: Get.height.percent(8),
-            child: AutoSizeText(
-              "Painel",
-              maxFontSize: 100,
-              maxLines: 1,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline2
-                  ?.copyWith(fontSize: 100),
-            ),
+          title: Text(
+            "Painel",
           ),
           onTap: () {},
         ),

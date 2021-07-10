@@ -7,10 +7,14 @@ import '../../../../core/extensions/extensions.dart';
 import '../../../../core/utils/utils.dart';
 
 class HeaderPanelWidget extends StatelessWidget {
+  final VoidCallback onTap;
+  final String email;
   const HeaderPanelWidget({
     Key? key,
     required GlobalKey<ScaffoldState> scaffoldKey,
-  })   : _scaffoldKey = scaffoldKey,
+    required this.email,
+    required this.onTap,
+  })  : _scaffoldKey = scaffoldKey,
         super(key: key);
 
   final GlobalKey<ScaffoldState> _scaffoldKey;
@@ -66,7 +70,7 @@ class HeaderPanelWidget extends StatelessWidget {
               withSpaceWidth(),
               Flexible(
                 child: AutoSizeText(
-                  "Fulano de tal",
+                  email,
                   maxLines: 1,
                   maxFontSize: 50,
                   overflow: TextOverflow.ellipsis,
@@ -75,16 +79,19 @@ class HeaderPanelWidget extends StatelessWidget {
                 ),
               ),
               DropdownButton<String>(
-                onChanged: (change) {},
                 underline: SizedBox(),
-                icon: Icon(Icons.more_vert),
-                onTap: () {},
-                items: ["Sair"]
-                    .map((e) => DropdownMenuItem<String>(
-                          child: Text(e),
-                        ))
-                    .toList(),
-              ),
+                items: <String>['Sair'].map((String value) {
+                  return new DropdownMenuItem<String>(
+                    value: value,
+                    child: new Text(value),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  if (value == 'Sair') {
+                    onTap.call();
+                  }
+                },
+              )
             ],
           ),
         )
