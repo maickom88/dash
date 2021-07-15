@@ -57,7 +57,7 @@ DataRow makeRow(BuildContext context, CompanyModel e) => DataRow(
       cells: [
         DataCell(
           Text(
-            e.name.toUpperCase(),
+            e.name == 'None' ? '-' : e.name.toUpperCase(),
             style: Theme.of(context)
                 .textTheme
                 .bodyText2
@@ -66,7 +66,7 @@ DataRow makeRow(BuildContext context, CompanyModel e) => DataRow(
         ),
         DataCell(
           Text(
-            e.cnpj.toUpperCase(),
+            e.cnpj == 'None' ? '-' : e.cnpj.toUpperCase(),
             style: Theme.of(context)
                 .textTheme
                 .bodyText2
@@ -75,7 +75,7 @@ DataRow makeRow(BuildContext context, CompanyModel e) => DataRow(
         ),
         DataCell(
           Text(
-            e.pep.toUpperCase(),
+            e.pep == 'None' ? '-' : e.pep.toUpperCase(),
             style: Theme.of(context)
                 .textTheme
                 .bodyText2
@@ -84,7 +84,7 @@ DataRow makeRow(BuildContext context, CompanyModel e) => DataRow(
         ),
         DataCell(
           Text(
-            e.ordinary.toUpperCase(),
+            e.ordinary == 'None' ? '-' : e.ordinary.toUpperCase(),
             style: Theme.of(context)
                 .textTheme
                 .bodyText2
@@ -93,7 +93,7 @@ DataRow makeRow(BuildContext context, CompanyModel e) => DataRow(
         ),
         DataCell(
           Text(
-            e.totalAut.toUpperCase(),
+            e.totalAut == 'None' ? '-' : e.totalAut.toUpperCase(),
             style: Theme.of(context)
                 .textTheme
                 .bodyText2
@@ -102,7 +102,7 @@ DataRow makeRow(BuildContext context, CompanyModel e) => DataRow(
         ),
         DataCell(
           Text(
-            e.totalDec.toUpperCase(),
+            e.totalDec == 'None' ? '-' : e.totalDec.toUpperCase(),
             style: Theme.of(context)
                 .textTheme
                 .bodyText2
@@ -111,7 +111,9 @@ DataRow makeRow(BuildContext context, CompanyModel e) => DataRow(
         ),
         DataCell(
           Text(
-            e.county.toString().toUpperCase(),
+            e.county.toString() == 'None'
+                ? '-'
+                : e.county.toString().toUpperCase(),
             style: Theme.of(context)
                 .textTheme
                 .bodyText2
@@ -120,7 +122,9 @@ DataRow makeRow(BuildContext context, CompanyModel e) => DataRow(
         ),
         DataCell(
           Text(
-            e.industry.toString().toUpperCase(),
+            e.industry.toString() == 'None'
+                ? '-'
+                : e.industry.toString().toUpperCase(),
             style: Theme.of(context)
                 .textTheme
                 .bodyText2
