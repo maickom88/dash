@@ -90,6 +90,9 @@ class DashboardPage extends GetView<DashboardController> {
                                             .companyModelSearchRx.value.isEmpty
                                         ? controller.companies.value
                                         : controller.companyModelSearchRx.value,
+                                    onName: (name) {
+                                      controller.orderBy(name);
+                                    },
                                   ),
                                 ),
                               )

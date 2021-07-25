@@ -55,12 +55,49 @@ class DashboardController extends GetxController {
         backgroundColor: Colors.red[800],
       );
     }, (r) {
+      r.sort((b, a) => a.ordinary.toNumber().compareTo(b.ordinary.toNumber()));
       companies.value = r;
     });
+  }
+
+  orderBy(String name) {
+    companyModelSearchRx.value = companies;
+    if (name.toUpperCase() == 'PEP') {
+      companyModelSearchRx.value
+          .sort((b, a) => a.pep.toNumber().compareTo(b.pep.toNumber()));
+    }
+    if (name.toUpperCase() == 'ORDINÁRIO') {
+      companyModelSearchRx.value.sort(
+          (b, a) => a.ordinary.toNumber().compareTo(b.ordinary.toNumber()));
+    }
+    if (name.toUpperCase() == 'TOTAL AUTUAÇÃO') {
+      companyModelSearchRx.value.sort(
+          (b, a) => a.totalAut.toNumber().compareTo(b.totalAut.toNumber()));
+    }
+    if (name.toUpperCase() == 'TOTAL DECLARADO') {
+      companyModelSearchRx.value.sort(
+          (b, a) => a.totalDec.toNumber().compareTo(b.totalDec.toNumber()));
+    }
+    if (name.toUpperCase() == 'COUNTRY') {
+      companyModelSearchRx.value.sort((b, a) => a.county.compareTo(b.county));
+    }
   }
 
   Future<void> logout() async {
     await Repository().logout();
     Get.back(result: true);
+  }
+}
+
+extension FormatterString on String {
+  double toNumber() {
+    if (this.toUpperCase() == '-' || this.toUpperCase() == 'NONE') {
+      return 0;
+    }
+    return double.parse(this
+        .toUpperCase()
+        .replaceAll('R\$ ', '')
+        .replaceAll(',', '')
+        .replaceAll('.', ''));
   }
 }

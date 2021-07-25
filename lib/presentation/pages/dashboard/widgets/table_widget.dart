@@ -1,17 +1,20 @@
-import 'package:dash/core/utils/responsive_util.dart';
-import 'package:dash/data/models/company_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'package:dash/core/utils/responsive_util.dart';
+import 'package:dash/data/models/company_model.dart';
+
 import '../../../../core/extensions/extensions.dart';
 
 class TableWidget extends StatelessWidget {
   final List<String> columns;
   final List<CompanyModel> rows;
-
+  final Function(String) onName;
   const TableWidget({
     Key? key,
-    required this.rows,
     required this.columns,
+    required this.rows,
+    required this.onName,
   }) : super(key: key);
 
   @override
@@ -23,17 +26,17 @@ class TableWidget extends StatelessWidget {
       child: Scrollbar(
         child: ListView(
           children: [
-            SingleChildScrollView(
-              scrollDirection: Responsive.isMobile(context)
-                  ? Axis.horizontal
-                  : Axis.vertical,
-              child: DataTable(
-                horizontalMargin: 0,
-                columnSpacing: 20,
-                columns: columns
-                    .map<DataColumn>(
-                      (e) => DataColumn(
-                        label: Text(
+            DataTable(
+              horizontalMargin: 0,
+              columnSpacing: 20,
+              columns: columns
+                  .map<DataColumn>(
+                    (e) => DataColumn(
+                      label: TextButton(
+                        onPressed: () {
+                          onName(e);
+                        },
+                        child: Text(
                           e.toUpperCase(),
                           style: Theme.of(context)
                               .textTheme
@@ -41,10 +44,10 @@ class TableWidget extends StatelessWidget {
                               ?.copyWith(height: 0.3, fontSize: 13),
                         ),
                       ),
-                    )
-                    .toList(),
-                rows: rows.map((e) => makeRow(context, e)).toList(),
-              ),
+                    ),
+                  )
+                  .toList(),
+              rows: rows.map((e) => makeRow(context, e)).toList(),
             ),
           ],
         ),
