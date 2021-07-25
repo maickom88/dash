@@ -78,7 +78,7 @@ class DashboardController extends GetxController {
       companyModelSearchRx.value.sort(
           (b, a) => a.totalDec.toNumber().compareTo(b.totalDec.toNumber()));
     }
-    if (name.toUpperCase() == 'COUNTRY') {
+    if (name.toUpperCase() == 'MUNICÍPIO') {
       companyModelSearchRx.value.sort((b, a) => a.county.compareTo(b.county));
     }
   }

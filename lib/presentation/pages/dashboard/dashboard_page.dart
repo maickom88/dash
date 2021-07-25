@@ -83,8 +83,8 @@ class DashboardPage extends GetView<DashboardController> {
                                       'ORDINÁRIO',
                                       'TOTAL AUTUAÇÃO',
                                       'TOTAL DECLARADO',
-                                      'COUNTRY',
-                                      'INDUSTRY',
+                                      'MUNICÍPIO',
+                                      'INDÚSTRIA',
                                     ],
                                     rows: controller
                                             .companyModelSearchRx.value.isEmpty
