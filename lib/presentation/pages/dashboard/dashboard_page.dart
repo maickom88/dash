@@ -1,3 +1,5 @@
+import 'package:dash/presentation/components/dash_loading.dart';
+import 'package:dash/presentation/pages/dashboard/widgets/table_epat.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -92,6 +94,69 @@ class DashboardPage extends GetView<DashboardController> {
                                         : controller.companyModelSearchRx.value,
                                     onName: (name) {
                                       controller.orderBy(name);
+                                    },
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        withSpaceHeight(size: 20),
+                        Container(
+                          padding: EdgeInsets.all(Layout.defaultPadding),
+                          width: Get.width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                                Layout.defaultBorderRadius),
+                            color: Colors.white.withOpacity(0.1),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              HeaderTableWidget(
+                                title: 'EPAT',
+                                isShowFilter: true,
+                                onFilter: (start, end) =>
+                                    controller.getEpatsOnFilter(start, end),
+                                onSearch: (value) =>
+                                    controller.searchEpat(value),
+                              ),
+                              Obx(
+                                () => Visibility(
+                                  visible: controller.resetar.value,
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Filtrando de ${controller.startDate} a ${controller.endDate}',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      SizedBox(width: 40),
+                                      TextButton(
+                                          onPressed: () =>
+                                              controller.resetarDate(),
+                                          child: Text('Resetar filtro'))
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 20),
+                              Obx(
+                                () => SizedBox(
+                                  width: Get.width,
+                                  child: TableEpatWidget(
+                                    columns: [
+                                      'AIIM',
+                                      'DRT',
+                                      'AUTUADO',
+                                      'DATA AIIM',
+                                      'ASSUNTO',
+                                    ],
+                                    rows: controller
+                                            .epatModelSearchRx.value.isEmpty
+                                        ? controller.epats.value
+                                        : controller.epatModelSearchRx.value,
+                                    onName: (name) {
+                                      controller.orderByEpat(name);
                                     },
                                   ),
                                 ),

@@ -1,15 +1,14 @@
+import 'package:dash/data/models/epat_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:dash/data/models/company_model.dart';
-
 import '../../../../core/extensions/extensions.dart';
 
-class TableWidget extends StatelessWidget {
+class TableEpatWidget extends StatelessWidget {
   final List<String> columns;
-  final List<CompanyModel> rows;
+  final List<EpatModel> rows;
   final Function(String) onName;
-  const TableWidget({
+  const TableEpatWidget({
     Key? key,
     required this.columns,
     required this.rows,
@@ -55,11 +54,11 @@ class TableWidget extends StatelessWidget {
   }
 }
 
-DataRow makeRow(BuildContext context, CompanyModel e) => DataRow(
+DataRow makeRow(BuildContext context, EpatModel e) => DataRow(
       cells: [
         DataCell(
           Text(
-            e.name == 'None' ? '-' : e.name.toUpperCase(),
+            e.aiim == 'None' ? '-' : e.aiim.toUpperCase(),
             style: Theme.of(context)
                 .textTheme
                 .bodyText2
@@ -68,7 +67,7 @@ DataRow makeRow(BuildContext context, CompanyModel e) => DataRow(
         ),
         DataCell(
           Text(
-            e.cnpj == 'None' ? '-' : e.cnpj.toUpperCase(),
+            e.autuado == 'None' ? '-' : e.autuado.toUpperCase(),
             style: Theme.of(context)
                 .textTheme
                 .bodyText2
@@ -77,7 +76,7 @@ DataRow makeRow(BuildContext context, CompanyModel e) => DataRow(
         ),
         DataCell(
           Text(
-            e.pep == 'None' ? '-' : e.pep.toUpperCase(),
+            e.drt == 'None' ? '-' : e.drt.toUpperCase(),
             style: Theme.of(context)
                 .textTheme
                 .bodyText2
@@ -86,7 +85,7 @@ DataRow makeRow(BuildContext context, CompanyModel e) => DataRow(
         ),
         DataCell(
           Text(
-            e.ordinary == 'None' ? '-' : e.ordinary.toUpperCase(),
+            e.data == 'None' ? '-' : e.data.toUpperCase(),
             style: Theme.of(context)
                 .textTheme
                 .bodyText2
@@ -95,38 +94,7 @@ DataRow makeRow(BuildContext context, CompanyModel e) => DataRow(
         ),
         DataCell(
           Text(
-            e.totalAut == 'None' ? '-' : e.totalAut.toUpperCase(),
-            style: Theme.of(context)
-                .textTheme
-                .bodyText2
-                ?.copyWith(color: Colors.white),
-          ),
-        ),
-        DataCell(
-          Text(
-            e.totalDec == 'None' ? '-' : e.totalDec.toUpperCase(),
-            style: Theme.of(context)
-                .textTheme
-                .bodyText2
-                ?.copyWith(color: Colors.white),
-          ),
-        ),
-        DataCell(
-          Text(
-            e.county.toString() == 'None'
-                ? '-'
-                : e.county.toString().toUpperCase(),
-            style: Theme.of(context)
-                .textTheme
-                .bodyText2
-                ?.copyWith(color: Colors.white),
-          ),
-        ),
-        DataCell(
-          Text(
-            e.industry.toString() == 'None'
-                ? '-'
-                : e.industry.toString().toUpperCase(),
+            e.assunto == 'None' ? '-' : e.assunto.toUpperCase(),
             style: Theme.of(context)
                 .textTheme
                 .bodyText2

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:dash/core/constants/url_constants.dart';
 import 'package:dash/data/models/company_model.dart';
+import 'package:dash/data/models/epat_model.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../core/errors/failure.dart';
 import '../models/models.dart';
@@ -42,6 +43,50 @@ class Repository {
         final list = body['companies'] as List;
         final companies = list.map((e) => CompanyModel.fromMap(e)).toList();
         return Right(companies);
+      }
+      if (response.statusCode == 401) {
+        return Left(UnauthorizedError(message: 'Seu acesso se expirou!'));
+      }
+      return Left(
+          ServerError(message: "Error ao tentar recuperar as companias!"));
+    } catch (e) {
+      return Left(
+          ServerError(message: "Error ao tentar recuperar as companias!"));
+    }
+  }
+
+  Future<Either<Failure, List<EpatModel>>> getEpats(String token) async {
+    try {
+      final response = await http.get(Uri.parse(UrlConst.epatEndpoint),
+          headers: {"Authorization": "JWT $token"});
+      if (response.statusCode == 200) {
+        final body = json.decode(response.body);
+        final list = body['epat'] as List;
+        final epat = list.map((e) => EpatModel.fromMap(e)).toList();
+        return Right(epat);
+      }
+      if (response.statusCode == 401) {
+        return Left(UnauthorizedError(message: 'Seu acesso se expirou!'));
+      }
+      return Left(
+          ServerError(message: "Error ao tentar recuperar as companias!"));
+    } catch (e) {
+      return Left(
+          ServerError(message: "Error ao tentar recuperar as companias!"));
+    }
+  }
+
+  Future<Either<Failure, List<EpatModel>>> getEpatsOnFilter(
+      String start, String end, String token) async {
+    try {
+      final response = await http.get(
+          Uri.parse('${UrlConst.epatEndpoint}/$start/$end'),
+          headers: {"Authorization": "JWT $token"});
+      if (response.statusCode == 200) {
+        final body = json.decode(response.body);
+        final list = body['epat'] as List;
+        final epat = list.map((e) => EpatModel.fromMap(e)).toList();
+        return Right(epat);
       }
       if (response.statusCode == 401) {
         return Left(UnauthorizedError(message: 'Seu acesso se expirou!'));
