@@ -1,14 +1,13 @@
 import 'dart:async';
 
-import 'package:dash/core/constants/routes_constants.dart';
-import 'package:dash/core/errors/failure.dart';
-import 'package:dash/data/models/company_model.dart';
-import 'package:dash/data/models/epat_model.dart';
-import 'package:dash/presentation/components/dash_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../../../core/constants/routes_constants.dart';
+import '../../../core/errors/failure.dart';
+import '../../../data/models/company_model.dart';
+import '../../../data/models/epat_model.dart';
 import '../../../data/models/models.dart';
 import '../../../data/repositories/repository.dart';
 
@@ -127,6 +126,7 @@ class DashboardController extends GetxController {
       resetar.value = true;
       startDate.value = start;
       endDate.value = end;
+      update();
     });
   }
 

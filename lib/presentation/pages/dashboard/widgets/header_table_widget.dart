@@ -1,6 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:universal_html/html.dart' as html;
+
+import 'package:dash/core/utils/pdf_api.dart';
+import 'package:dash/presentation/components/dash_loading.dart';
 
 import '../../../../core/utils/responsive_util.dart';
 import 'filter_on_data_widget.dart';
@@ -8,6 +12,10 @@ import 'filter_on_data_widget.dart';
 class HeaderTableWidget extends StatelessWidget {
   final String title;
   final bool isShowFilter;
+  final bool isShowPdf;
+  final List<List> data;
+  final String dateFirst;
+  final String dateLast;
 
   final Function(String) onSearch;
   final Function(String startDate, String endDate)? onFilter;
@@ -15,6 +23,10 @@ class HeaderTableWidget extends StatelessWidget {
     Key? key,
     required this.title,
     this.isShowFilter = false,
+    this.isShowPdf = false,
+    required this.data,
+    required this.dateLast,
+    required this.dateFirst,
     required this.onSearch,
     this.onFilter,
   }) : super(key: key);
@@ -36,6 +48,7 @@ class HeaderTableWidget extends StatelessWidget {
         ),
         SizedBox(width: 10),
         Expanded(
+          flex: 4,
           child: TextFormField(
             onChanged: (value) => onSearch(value),
             style: Theme.of(context)
@@ -61,6 +74,30 @@ class HeaderTableWidget extends StatelessWidget {
               onFilter: (date) => onFilter?.call(date.startTime, date.endTime),
             )),
             child: Text('Filtrar'),
+          ),
+        ),
+        SizedBox(width: 10),
+        Visibility(
+          visible: isShowPdf,
+          child: TextButton(
+            onPressed: () async {
+              Get.dialog(DashLoading());
+              final file = await PDF.generatePDF(
+                data,
+                fim: dateLast.isNotEmpty ? dateLast : null,
+                inicio: dateFirst.isNotEmpty ? dateFirst : null,
+              );
+              Get.back();
+              try {
+                await PDF.openFile(file);
+              } catch (e) {
+                final blob = html.Blob([file], 'application/pdf');
+                final url = html.Url.createObjectUrlFromBlob(blob);
+                html.window.open(url, "_blank");
+                html.Url.revokeObjectUrl(url);
+              }
+            },
+            child: Text('Baixar PDF'),
           ),
         )
       ],

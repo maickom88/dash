@@ -1,41 +1,51 @@
 import 'dart:io';
+
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 
 class PDF {
-  static Future<dynamic> generatePDF() async {
+  static Future<dynamic> generatePDF(
+    List<List<dynamic>> epat, {
+    String? inicio,
+    String? fim,
+  }) async {
     final pdf = Document();
 
     final pageTheme = PageTheme(
       pageFormat: PdfPageFormat.a4,
     );
-
     pdf.addPage(MultiPage(
         pageTheme: pageTheme,
-        header: (_) =>
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Text(
-                getDateNow(),
-                style: TextStyle(
-                  fontSize: 12,
-                ),
+        maxPages: 200,
+        header: (_) => Padding(
+              padding: EdgeInsets.only(bottom: 15, top: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    getDateNow(),
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
+                  Text(
+                    "Campos & Barros",
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
+                  )
+                ],
               ),
-              Text(
-                "Encom Energia",
-                style: TextStyle(
-                  fontSize: 12,
-                ),
-              )
-            ]),
+            ),
         build: (build) {
           return [
             SizedBox(height: 20),
             Container(
               child: Center(
                 child: Text(
-                  'Encom Energia',
+                  "Campos & Barros",
                   style: TextStyle(fontSize: 40),
                 ),
               ),
@@ -43,103 +53,80 @@ class PDF {
             SizedBox(height: 20),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Text(
-                'SISTEMA DE MONITORAÇÃO REMOTA',
+                'EPAT',
                 style: TextStyle(fontSize: 13),
               ),
               Text(
-                'CONTRATO 001/2013',
-                style: TextStyle(fontSize: 12, color: PdfColors.red),
+                inicio != null ? 'Com filtro' : 'Sem filtro',
+                style: TextStyle(fontSize: 12),
               ),
             ]),
             SizedBox(height: 20),
-            Row(children: [
-              Expanded(
-                flex: 1,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: PdfColors.red400,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
+            if (inicio != null)
+              Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: PdfColors.red400,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                        ),
+                      ),
+                      padding: EdgeInsets.all(13),
+                      child: Text("Inicio",
+                          style: TextStyle(color: PdfColors.white)),
                     ),
                   ),
-                  padding: EdgeInsets.all(13),
-                  child: Text("Site", style: TextStyle(color: PdfColors.white)),
-                ),
+                  Expanded(
+                    flex: 4,
+                    child: Container(
+                      color: PdfColors.grey100,
+                      padding: EdgeInsets.all(13),
+                      child: Text(inicio),
+                    ),
+                  ),
+                ],
               ),
-              Expanded(
-                flex: 4,
-                child: Container(
-                  color: PdfColors.grey100,
-                  padding: EdgeInsets.all(13),
-                  child: Text("Edifício Sede - Sistema Y"),
-                ),
-              ),
-            ]),
             SizedBox(height: 10),
-            Row(children: [
-              Expanded(
-                flex: 1,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: PdfColors.red400,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
+            if (fim != null)
+              Row(children: [
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: PdfColors.red400,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                      ),
                     ),
+                    padding: EdgeInsets.all(13),
+                    child:
+                        Text("Fim", style: TextStyle(color: PdfColors.white)),
                   ),
-                  padding: EdgeInsets.all(13),
-                  child: Text("Supervisor",
-                      style: TextStyle(color: PdfColors.white)),
                 ),
-              ),
-              Expanded(
-                flex: 4,
-                child: Container(
-                  color: PdfColors.grey100,
-                  padding: EdgeInsets.all(13),
-                  child: Text("16140114"),
-                ),
-              ),
-            ]),
-            SizedBox(height: 10),
-            Row(children: [
-              Expanded(
-                flex: 1,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: PdfColors.red400,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
-                    ),
+                Expanded(
+                  flex: 4,
+                  child: Container(
+                    color: PdfColors.grey100,
+                    padding: EdgeInsets.all(13),
+                    child: Text(fim),
                   ),
-                  padding: EdgeInsets.all(13),
-                  child:
-                      Text("Período", style: TextStyle(color: PdfColors.white)),
                 ),
-              ),
-              Expanded(
-                flex: 4,
-                child: Container(
-                  color: PdfColors.grey100,
-                  padding: EdgeInsets.all(13),
-                  child: Text("01/11/2018 à 30/11/2018"),
-                ),
-              ),
-            ]),
+              ]),
             SizedBox(height: 20),
-            Text(
-              'EQUIPAMENTOS',
-              style: TextStyle(fontSize: 13),
-            ),
-            SizedBox(height: 10),
             Table.fromTextArray(
-              headers: <dynamic>['N° Ordem', 'Descrição'],
-              cellAlignment: Alignment.center,
-              data: [
-                ["GMG 500KVA Caterpillar Sistema Y", "141"]
+              headers: <dynamic>[
+                'AIIM',
+                'DRT',
+                'AUTUADO',
+                'DATA AIIM',
               ],
+              cellAlignment: Alignment.center,
+              data: epat,
             )
           ];
         }));

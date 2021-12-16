@@ -1,11 +1,10 @@
-import 'package:dash/presentation/components/dash_loading.dart';
-import 'package:dash/presentation/pages/dashboard/widgets/table_epat.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../core/constants/constants.dart';
 import '../../../core/extensions/extensions.dart';
 import 'dashboard.dart';
+import 'widgets/table_epat.dart';
 import 'widgets/widgets.dart';
 
 class DashboardPage extends GetView<DashboardController> {
@@ -73,6 +72,9 @@ class DashboardPage extends GetView<DashboardController> {
                                 title: 'PGE',
                                 onSearch: (value) =>
                                     controller.searchCompany(value),
+                                data: [],
+                                dateFirst: '',
+                                dateLast: '',
                               ),
                               Obx(
                                 () => SizedBox(
@@ -113,13 +115,36 @@ class DashboardPage extends GetView<DashboardController> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              HeaderTableWidget(
-                                title: 'EPAT',
-                                isShowFilter: true,
-                                onFilter: (start, end) =>
-                                    controller.getEpatsOnFilter(start, end),
-                                onSearch: (value) =>
-                                    controller.searchEpat(value),
+                              Obx(
+                                () => HeaderTableWidget(
+                                  title: 'EPAT',
+                                  isShowPdf: true,
+                                  isShowFilter: true,
+                                  onFilter: (start, end) =>
+                                      controller.getEpatsOnFilter(start, end),
+                                  onSearch: (value) =>
+                                      controller.searchEpat(value),
+                                  data:
+                                      controller.epatModelSearchRx.value.isEmpty
+                                          ? controller.epats.value
+                                              .map((e) => [
+                                                    e.aiim,
+                                                    e.drt,
+                                                    e.autuado,
+                                                    e.data,
+                                                  ])
+                                              .toList()
+                                          : controller.epatModelSearchRx.value
+                                              .map((e) => [
+                                                    e.aiim,
+                                                    e.drt,
+                                                    e.autuado,
+                                                    e.data,
+                                                  ])
+                                              .toList(),
+                                  dateLast: controller.endDate.value,
+                                  dateFirst: controller.startDate.value,
+                                ),
                               ),
                               Obx(
                                 () => Visibility(

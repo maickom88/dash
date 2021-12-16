@@ -3,11 +3,9 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
-import 'package:universal_html/html.dart' as html;
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/extensions/extensions.dart';
-import '../../../../core/utils/pdf_api.dart';
 
 class DialogReports extends StatelessWidget {
   @override
@@ -180,15 +178,15 @@ class DialogReports extends StatelessWidget {
                   backgroundColor: MaterialStateProperty.all(Colors.blue[800]),
                 ),
                 onPressed: () async {
-                  final file = await PDF.generatePDF();
-                  try {
-                    await PDF.openFile(file);
-                  } catch (e) {
-                    final blob = html.Blob([file], 'application/pdf');
-                    final url = html.Url.createObjectUrlFromBlob(blob);
-                    html.window.open(url, "_blank");
-                    html.Url.revokeObjectUrl(url);
-                  }
+                  // final file = await PDF.generatePDF();
+                  // try {
+                  //   await PDF.openFile(file);
+                  // } catch (e) {
+                  //   final blob = html.Blob([file], 'application/pdf');
+                  //   final url = html.Url.createObjectUrlFromBlob(blob);
+                  //   html.window.open(url, "_blank");
+                  //   html.Url.revokeObjectUrl(url);
+                  // }
                 },
                 child: Text(
                   "Gerar relatório",
