@@ -92,6 +92,7 @@ class DashboardPage extends GetView<DashboardController> {
                                     ],
                                     rows: controller
                                             .companyModelSearchRx.value.isEmpty
+                                        // ignore: invalid_use_of_protected_member
                                         ? controller.companies.value
                                         : controller.companyModelSearchRx.value,
                                     onName: (name) {
@@ -124,24 +125,25 @@ class DashboardPage extends GetView<DashboardController> {
                                       controller.getEpatsOnFilter(start, end),
                                   onSearch: (value) =>
                                       controller.searchEpat(value),
-                                  data:
-                                      controller.epatModelSearchRx.value.isEmpty
-                                          ? controller.epats.value
-                                              .map((e) => [
-                                                    e.aiim,
-                                                    e.drt,
-                                                    e.autuado,
-                                                    e.data,
-                                                  ])
-                                              .toList()
-                                          : controller.epatModelSearchRx.value
-                                              .map((e) => [
-                                                    e.aiim,
-                                                    e.drt,
-                                                    e.autuado,
-                                                    e.data,
-                                                  ])
-                                              .toList(),
+                                  data: controller
+                                          .epatModelSearchRx.value.isEmpty
+                                      // ignore: invalid_use_of_protected_member
+                                      ? controller.epats.value
+                                          .map((e) => [
+                                                e.aiim,
+                                                e.drt,
+                                                e.autuado,
+                                                e.data,
+                                              ])
+                                          .toList()
+                                      : controller.epatModelSearchRx.value
+                                          .map((e) => [
+                                                e.aiim,
+                                                e.drt,
+                                                e.autuado,
+                                                e.data,
+                                              ])
+                                          .toList(),
                                   dateLast: controller.endDate.value,
                                   dateFirst: controller.startDate.value,
                                 ),
@@ -178,6 +180,7 @@ class DashboardPage extends GetView<DashboardController> {
                                     ],
                                     rows: controller
                                             .epatModelSearchRx.value.isEmpty
+                                        // ignore: invalid_use_of_protected_member
                                         ? controller.epats.value
                                         : controller.epatModelSearchRx.value,
                                     onName: (name) {
