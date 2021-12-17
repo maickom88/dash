@@ -68,13 +68,42 @@ class DashboardPage extends GetView<DashboardController> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              HeaderTableWidget(
-                                title: 'PGE',
-                                onSearch: (value) =>
-                                    controller.searchCompany(value),
-                                data: [],
-                                dateFirst: '',
-                                dateLast: '',
+                              Obx(
+                                () => HeaderTableWidget(
+                                  title: 'PGE',
+                                  isShowPdf: true,
+                                  onSearch: (value) =>
+                                      controller.searchCompany(value),
+                                  data: controller
+                                          .companyModelSearchRx.value.isEmpty
+                                      // ignore: invalid_use_of_protected_member
+                                      ? controller.companies.value
+                                          .map((e) => [
+                                                e.name,
+                                                e.cnpj,
+                                                e.pep,
+                                                e.ordinary,
+                                                e.totalAut,
+                                                e.totalDec,
+                                                e.county,
+                                                e.industry,
+                                              ])
+                                          .toList()
+                                      : controller.companyModelSearchRx.value
+                                          .map((e) => [
+                                                e.name,
+                                                e.cnpj,
+                                                e.pep,
+                                                e.ordinary,
+                                                e.totalAut,
+                                                e.totalDec,
+                                                e.county,
+                                                e.industry,
+                                              ])
+                                          .toList(),
+                                  dateFirst: '',
+                                  dateLast: '',
+                                ),
                               ),
                               Obx(
                                 () => SizedBox(

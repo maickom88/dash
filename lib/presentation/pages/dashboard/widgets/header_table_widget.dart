@@ -81,20 +81,35 @@ class HeaderTableWidget extends StatelessWidget {
           visible: isShowPdf,
           child: TextButton(
             onPressed: () async {
-              Get.dialog(DashLoading());
-              final file = await PDF.generatePDF(
-                data,
-                fim: dateLast.isNotEmpty ? dateLast : null,
-                inicio: dateFirst.isNotEmpty ? dateFirst : null,
-              );
-              Get.back();
-              try {
-                await PDF.openFile(file);
-              } catch (e) {
-                final blob = html.Blob([file], 'application/pdf');
-                final url = html.Url.createObjectUrlFromBlob(blob);
-                html.window.open(url, "_blank");
-                html.Url.revokeObjectUrl(url);
+              if (title == 'PGE') {
+                print(data);
+                final file = await PDF.generatePGEPDF(
+                  data,
+                  fim: dateLast.isNotEmpty ? dateLast : null,
+                  inicio: dateFirst.isNotEmpty ? dateFirst : null,
+                );
+                try {
+                  await PDF.openFile(file);
+                } catch (e) {
+                  final blob = html.Blob([file], 'application/pdf');
+                  final url = html.Url.createObjectUrlFromBlob(blob);
+                  html.window.open(url, "_blank");
+                  html.Url.revokeObjectUrl(url);
+                }
+              } else {
+                final file = await PDF.generatePDF(
+                  data,
+                  fim: dateLast.isNotEmpty ? dateLast : null,
+                  inicio: dateFirst.isNotEmpty ? dateFirst : null,
+                );
+                try {
+                  await PDF.openFile(file);
+                } catch (e) {
+                  final blob = html.Blob([file], 'application/pdf');
+                  final url = html.Url.createObjectUrlFromBlob(blob);
+                  html.window.open(url, "_blank");
+                  html.Url.revokeObjectUrl(url);
+                }
               }
             },
             child: Text('Baixar PDF'),

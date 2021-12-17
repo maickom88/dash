@@ -8,7 +8,7 @@ class CompanyModel {
   final String totalAut;
   final String totalDec;
   final int county;
-  final int industry;
+  final String industry;
   final int myId;
   CompanyModel({
     required this.name,
