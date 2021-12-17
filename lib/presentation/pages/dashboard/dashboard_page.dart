@@ -81,12 +81,12 @@ class DashboardPage extends GetView<DashboardController> {
                                           .map((e) => [
                                                 e.name,
                                                 e.cnpj,
-                                                e.pep,
-                                                e.ordinary,
-                                                e.totalAut,
-                                                e.totalDec,
-                                                e.county,
-                                                e.industry,
+                                                // e.pep,
+                                                // e.ordinary,
+                                                // e.totalAut,
+                                                // e.totalDec,
+                                                // e.county,
+                                                // e.industry,
                                               ])
                                           .toList()
                                       : controller.companyModelSearchRx.value
@@ -94,11 +94,11 @@ class DashboardPage extends GetView<DashboardController> {
                                                 e.name,
                                                 e.cnpj,
                                                 e.pep,
-                                                e.ordinary,
-                                                e.totalAut,
-                                                e.totalDec,
-                                                e.county,
-                                                e.industry,
+                                                // e.ordinary,
+                                                // e.totalAut,
+                                                // e.totalDec,
+                                                // e.county,
+                                                // e.industry,
                                               ])
                                           .toList(),
                                   dateFirst: '',
