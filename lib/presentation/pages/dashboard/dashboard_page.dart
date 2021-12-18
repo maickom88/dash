@@ -78,27 +78,29 @@ class DashboardPage extends GetView<DashboardController> {
                                           .companyModelSearchRx.value.isEmpty
                                       // ignore: invalid_use_of_protected_member
                                       ? controller.companies.value
-                                          .map((e) => [
-                                                e.name,
-                                                e.cnpj,
-                                                // e.pep,
-                                                // e.ordinary,
-                                                // e.totalAut,
-                                                // e.totalDec,
-                                                // e.county,
-                                                // e.industry,
-                                              ])
-                                          .toList()
-                                      : controller.companyModelSearchRx.value
+                                          .take(300)
                                           .map((e) => [
                                                 e.name,
                                                 e.cnpj,
                                                 e.pep,
-                                                // e.ordinary,
-                                                // e.totalAut,
-                                                // e.totalDec,
-                                                // e.county,
-                                                // e.industry,
+                                                e.ordinary,
+                                                e.totalAut,
+                                                e.totalDec,
+                                                e.county,
+                                                e.industry,
+                                              ])
+                                          .toList()
+                                      : controller.companyModelSearchRx.value
+                                          .take(300)
+                                          .map((e) => [
+                                                e.name,
+                                                e.cnpj,
+                                                e.pep,
+                                                e.ordinary,
+                                                e.totalAut,
+                                                e.totalDec,
+                                                e.county,
+                                                e.industry,
                                               ])
                                           .toList(),
                                   dateFirst: '',
