@@ -64,6 +64,8 @@ class DashboardPage extends GetView<DashboardController> {
                           ),
                           iconColor: Colors.white,
                           collapsedIconColor: Colors.white,
+                          collapsedBackgroundColor:
+                              Colors.white.withOpacity(0.2),
                           onExpansionChanged: (isExpanded) => print(isExpanded),
                           children: [
                             Container(
@@ -150,6 +152,8 @@ class DashboardPage extends GetView<DashboardController> {
                         ),
                         withSpaceHeight(size: 20),
                         ExpansionTile(
+                          collapsedBackgroundColor:
+                              Colors.white.withOpacity(0.2),
                           title: Text(
                             '',
                             style: TextStyle(color: Colors.white),
