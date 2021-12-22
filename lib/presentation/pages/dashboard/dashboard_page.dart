@@ -63,6 +63,7 @@ class DashboardPage extends GetView<DashboardController> {
                             style: TextStyle(color: Colors.white),
                           ),
                           iconColor: Colors.white,
+                          collapsedIconColor: Colors.white,
                           onExpansionChanged: (isExpanded) => print(isExpanded),
                           children: [
                             Container(
@@ -154,6 +155,7 @@ class DashboardPage extends GetView<DashboardController> {
                             style: TextStyle(color: Colors.white),
                           ),
                           iconColor: Colors.white,
+                          collapsedIconColor: Colors.white,
                           onExpansionChanged: (isExpanded) => print(isExpanded),
                           children: [
                             Container(
